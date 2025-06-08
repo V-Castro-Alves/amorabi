@@ -8,7 +8,7 @@ class Evento(models.Model):
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
     capacidade_participantes = models.IntegerField()
-    responsavel = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='eventos_responsavel')
+    responsavel = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='eventos_responsavel')
     status = models.CharField(
         max_length=20,
         choices=[
@@ -35,10 +35,21 @@ class Evento(models.Model):
 
 class Participacao(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    usuario = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='participacoes')
+    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='participacoes')
     evento = models.ForeignKey('Evento', on_delete=models.CASCADE, related_name='participacoes')
     data_inscricao = models.DateTimeField(auto_now_add=True)
     presenca = models.BooleanField(default=False)
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('pendente', 'Pendente'),
+            ('confirmada', 'Confirmada'),
+            ('cancelada', 'Cancelada'),
+        ],
+        default='pendente'
+    )
+    motivo_cancelamento = models.TextField(blank=True, null=True)
+    data_cancelamento = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f'{self.usuario.username} em {self.evento.titulo}'

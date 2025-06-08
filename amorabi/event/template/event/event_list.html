@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Events</title>
+</head>
+<body>
+    <h1>Available Events</h1>
+    <ul>
+        {% for event in events %}
+            <li>{{ event.name }}</li>
+        {% empty %}
+            <li>No events available.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

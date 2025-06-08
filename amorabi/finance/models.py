@@ -45,7 +45,7 @@ class MovimentacaoFinanceira(models.Model):
 class MovimentacaoFinanceiraEvento(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     movimentacao = models.ForeignKey(MovimentacaoFinanceira, on_delete=models.CASCADE, related_name='eventos')
-    evento = models.ForeignKey('events.Evento', on_delete=models.CASCADE, related_name='movimentacoes_financeiras')
+    evento = models.ForeignKey('event.Evento', on_delete=models.CASCADE, related_name='movimentacoes_financeiras')
 
     def __str__(self):
         return f'{self.movimentacao} - {self.evento}'

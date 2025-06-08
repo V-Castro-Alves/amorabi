@@ -3,7 +3,7 @@ import uuid
 
 class Notificacao(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    usuario = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='notificacoes')
+    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='notificacoes')
     mensagem = models.TextField(blank=True)
     tipo = models.CharField(max_length=50, choices=[
         ('seguranca', 'Segurança'),
