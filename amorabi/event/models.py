@@ -8,7 +8,7 @@ class Evento(models.Model):
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
     capacidade_participantes = models.IntegerField()
-    responsavel = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='evento_responsavel')
+    responsavel = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE, related_name='eventos_responsavel')
     status = models.CharField(
         max_length=20,
         choices=[
@@ -23,6 +23,10 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.titulo
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('evento_detail', args=[str(self.pk)])
 
     class Meta:
         verbose_name = "Evento"

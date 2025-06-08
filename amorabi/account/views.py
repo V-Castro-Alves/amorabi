@@ -5,6 +5,5 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 
 def login_view(request):
-
     return render(request, 'accounts/login.html')
 

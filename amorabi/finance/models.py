@@ -10,6 +10,10 @@ class CentroCusto(models.Model):
     def __str__(self):
         return self.nome
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('centrocusto_detail', args=[str(self.pk)])
+
     class Meta:
         verbose_name = "Centro de Custo"
         verbose_name_plural = "Centros de Custo"
@@ -24,10 +28,14 @@ class MovimentacaoFinanceira(models.Model):
         ('entrada', 'Entrada'),
         ('saida', 'Saída')
     ])
-    centro_custo = models.ForeignKey(CentroCusto, on_delete=models.CASCADE)
+    centro_custo = models.ForeignKey(CentroCusto, on_delete=models.CASCADE, related_name='movimentacoes')
 
     def __str__(self):
         return f'{self.descricao} - {self.valor}'
+
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('movimentacaofinanceira_detail', args=[str(self.pk)])
 
     class Meta:
         verbose_name = "Movimentação Financeira"
@@ -36,8 +44,8 @@ class MovimentacaoFinanceira(models.Model):
 
 class MovimentacaoFinanceiraEvento(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    movimentacao = models.ForeignKey(MovimentacaoFinanceira, on_delete=models.CASCADE)
-    evento = models.ForeignKey('events.Evento', on_delete=models.CASCADE)
+    movimentacao = models.ForeignKey(MovimentacaoFinanceira, on_delete=models.CASCADE, related_name='eventos')
+    evento = models.ForeignKey('events.Evento', on_delete=models.CASCADE, related_name='movimentacoes_financeiras')
 
     def __str__(self):
         return f'{self.movimentacao} - {self.evento}'
