@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Available Events</title>
-</head>
-<body>
-    <h1>Available Events</h1>
-    <ul>
-        {% for evento in eventos %}
-            <li>{{ evento.titulo }}</li>
-        {% empty %}
-            <li>Sem eventos disponíveis</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<h1>Eventos disponíveis</h1>
+<ul>
+    {% for evento in eventos %}
+        <li>{{ evento.titulo }}</li>
+    {% empty %}
+        <li>Nenhum evento disponível</li>
+    {% endfor %}
+</ul>
+{% endblock %}
