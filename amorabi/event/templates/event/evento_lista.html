@@ -6,10 +6,10 @@
 <body>
     <h1>Available Events</h1>
     <ul>
-        {% for event in events %}
-            <li>{{ event.name }}</li>
+        {% for evento in eventos %}
+            <li>{{ evento.titulo }}</li>
         {% empty %}
-            <li>No events available.</li>
+            <li>Sem eventos disponíveis</li>
         {% endfor %}
     </ul>
 </body>
