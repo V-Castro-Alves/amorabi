@@ -36,12 +36,12 @@ class CustomUser(AbstractUser):
         if self.cpf:
             validar_cpf(self.cpf)
 
-class Aprovacao(models.Model):
+class StatusUsuario(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='aprovacoes')
+    usuario = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='status_usuario')
     data_aprovacao = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=20, choices=[
         ('aprovado', 'Aprovado'),
         ('rejeitado', 'Rejeitado'),
     ])
-    aprovador = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='aprovacoes_realizadas')
+    responsavel = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='status_usuario_como_responsavel')

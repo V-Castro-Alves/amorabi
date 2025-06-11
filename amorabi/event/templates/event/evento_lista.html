@@ -3,7 +3,19 @@
 <h1>Eventos disponíveis</h1>
 <ul>
     {% for evento in eventos %}
-        <li>{{ evento.titulo }}</li>
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ evento.titulo }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Responsável:</strong> {{ evento.responsavel.username }}</p>
+            <p><strong>Data Início:</strong> {{ evento.data_inicio }}</p>
+            <p><strong>Data Fim:</strong> {{ evento.data_fim }}</p>
+            <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+            <p><strong>Local:</strong> {{ evento.local }}</p>
+            <p><strong>Vagas:</strong> {{ evento.capacidade_participantes }}</p>
+        </div>
+    </div>
     {% empty %}
         <li>Nenhum evento disponível</li>
     {% endfor %}

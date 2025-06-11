@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, StatusUsuario
 
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ('Informações adicionais', {
@@ -15,4 +16,9 @@ class CustomUserAdmin(UserAdmin):
     )
     list_display = UserAdmin.list_display + ('cpf', 'telefone', 'role')
 
-admin.site.register(CustomUser, CustomUserAdmin)
+@admin.register(StatusUsuario)
+class AprovacaoAdmin(admin.ModelAdmin):
+    list_display = ('usuario', 'data_aprovacao', 'status', 'responsavel')
+    list_filter = ('status', 'data_aprovacao')
+    search_fields = ('usuario__username', 'responsavel__username')
+    ordering = ('-data_aprovacao',)

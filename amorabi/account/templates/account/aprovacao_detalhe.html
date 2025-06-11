@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Detalhes do Usuário</h2>
+<p>Nome: {{ user.get_full_name }}</p>
+<p>Email: {{ user.email }}</p>
+<p>Telefone: {{ user.telefone }}</p>
+<p>CPF: {{ user.cpf }}</p>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" name="action" value="approve">Aprovar</button>
+  <button type="submit" name="action" value="disapprove">Reprovar</button>
+</form>
+{% endblock %}

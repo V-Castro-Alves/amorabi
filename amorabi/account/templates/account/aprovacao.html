@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Usuários pendentes de aprovação</h2>
+<ul>
+{% for user in users %}
+  <tr>
+    <td>{{ user.username }}</td>
+    <td>
+      <a href="{% url 'account:aprovacao_detail' user.uuid %}">Ver detalhes</a>
+    </td>
+  </tr>
+{% endfor %}
+</ul>
+{% endblock %}
