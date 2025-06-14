@@ -16,6 +16,7 @@ class Notificacao(models.Model):
     ])
     data_criacao = models.DateTimeField(auto_now_add=True)
     lida = models.BooleanField(default=False)
+    ativo = models.BooleanField(default=True)
 
     def __str__(self):
         return f'Notificação para {self.usuario.username} - {self.mensagem[:50]}'

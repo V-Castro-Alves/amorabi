@@ -1,0 +1,8 @@
+   :root {
+       --bs-primary: #9a0000;
+       --bs-secondary: #009a9a;
+   }
+
+   body {
+       font-family: 'Poppins', sans-serif;
+   }

@@ -29,6 +29,7 @@ class MovimentacaoFinanceira(models.Model):
         ('saida', 'Saída')
     ])
     centro_custo = models.ForeignKey(CentroCusto, on_delete=models.CASCADE, related_name='movimentacoes')
+    ativo = models.BooleanField(default=True, help_text="Indica se a movimentação está ativa")
 
     def __str__(self):
         return f'{self.descricao} - {self.valor}'
@@ -46,6 +47,7 @@ class MovimentacaoFinanceiraEvento(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     movimentacao = models.ForeignKey(MovimentacaoFinanceira, on_delete=models.CASCADE, related_name='eventos')
     evento = models.ForeignKey('event.Evento', on_delete=models.CASCADE, related_name='movimentacoes_financeiras')
+    ativo = models.BooleanField(default=True, help_text="Indica se a movimentação financeira por evento está ativa")
 
     def __str__(self):
         return f'{self.movimentacao} - {self.evento}'

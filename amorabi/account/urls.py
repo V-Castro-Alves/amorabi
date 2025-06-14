@@ -9,5 +9,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(next_page='account:login'), name='logout'),
     path('cadastro/', views.register, name='register'),
     path('aprovacoes/', views.aprovacoes, name='aprovacoes'),
-    path('aprovacao/<uuid:user_uuid>/', views.aprovacao_detail, name='aprovacao_detail'),
+    path('aprovacao/<uuid:user_uuid>/', views.aprovacao_detalhe, name='aprovacao_detalhe'),
+    path('resetar-senha/', views.resetar_senha, name='resetar_senha'),
 ]

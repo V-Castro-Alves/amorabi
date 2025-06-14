@@ -28,7 +28,7 @@ def aprovacoes(request):
     return render(request, 'account/aprovacao.html', {'users': users_sem_aprovacao})
 
 @login_required
-def aprovacao_detail(request, user_uuid):
+def aprovacao_detalhe(request, user_uuid):
     if not hasattr(request.user, 'role') or request.user.role != 'admin':
         return HttpResponseForbidden("Acesso restrito a administradores.")
     user = get_object_or_404(CustomUser, uuid=user_uuid, is_superuser=False)
@@ -50,3 +50,12 @@ def aprovacao_detail(request, user_uuid):
             messages.success(request, 'Usuário reprovado!')
         return redirect('account:aprovacoes')
     return render(request, 'account/aprovacao_detalhe.html', {'user': user})
+
+def resetar_senha(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = get_object_or_404(CustomUser, email=email)
+        # Lógica para enviar e-mail de redefinição de senha
+        messages.success(request, 'Instruções de redefinição de senha enviadas para o seu e-mail.')
+        return redirect('account:login')
+    return render(request, 'account/resetar_senha.html')

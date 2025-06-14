@@ -27,6 +27,7 @@ class CustomUser(AbstractUser):
     ]
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='usuario')
     cpf = models.CharField(max_length=11, unique=True, blank=True, null=True)
+    ativo = models.BooleanField(default=True)
 
     def __str__(self):
         return self.username
@@ -35,6 +36,11 @@ class CustomUser(AbstractUser):
         super().clean()
         if self.cpf:
             validar_cpf(self.cpf)
+    
+    class Meta:
+        verbose_name = "Usuário"
+        verbose_name_plural = "Usuários"
+        ordering = ['username']
 
 class StatusUsuario(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
@@ -45,3 +51,12 @@ class StatusUsuario(models.Model):
         ('rejeitado', 'Rejeitado'),
     ])
     responsavel = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, related_name='status_usuario_como_responsavel')
+    ativo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.usuario.username} - {self.status} - {self.data_aprovacao.strftime('%Y-%m-%d %H:%M:%S')}"
+    
+    class Meta:
+        verbose_name = "Status do Usuário"
+        verbose_name_plural = "Status dos Usuários"
+        ordering = ['-data_aprovacao']

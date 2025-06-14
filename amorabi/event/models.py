@@ -13,13 +13,15 @@ class Evento(models.Model):
         max_length=20,
         choices=[
             ('nao_iniciado', 'Não Iniciado'),
-            ('ativo', 'Ativo'),
+            ('em_andamento', 'Em Andamento'),
             ('encerrado', 'Encerrado'),
             ('suspenso', 'Suspenso'),
         ],
         default='nao_iniciado'
     )
     local = models.CharField(max_length=200)
+    ativo = models.BooleanField(default=True)
+    categoria = models.ForeignKey('CategoriaEvento', on_delete=models.SET_NULL, null=True, blank=True, related_name='eventos')
 
     def __str__(self):
         return self.titulo
@@ -50,6 +52,7 @@ class Participacao(models.Model):
     )
     motivo_cancelamento = models.TextField(blank=True, null=True)
     data_cancelamento = models.DateTimeField(blank=True, null=True)
+    ativo = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.usuario.username} em {self.evento.titulo}'
@@ -58,4 +61,68 @@ class Participacao(models.Model):
         unique_together = ('usuario', 'evento')
         verbose_name = "Participação"
         verbose_name_plural = "Participações"
+
+class Comentario(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='comentarios')
+    evento = models.ForeignKey('Evento', on_delete=models.CASCADE, related_name='comentarios')
+    conteudo = models.TextField()
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    ativo = models.BooleanField(default=True)
+    curtidas = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f'Comentário de {self.usuario.username} no evento {self.evento.titulo}'
+
+    class Meta:
+        verbose_name = "Comentário"
+        verbose_name_plural = "Comentários"
+        ordering = ['-data_criacao']
+
+class Avaliacao(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='avaliacoes')
+    evento = models.ForeignKey('Evento', on_delete=models.CASCADE, related_name='avaliacoes')
+    nota = models.IntegerField()
+    comentario = models.TextField(blank=True, null=True)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+    ativo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'Avaliação de {self.usuario.username} para {self.evento.titulo}'
+
+    class Meta:
+        verbose_name = "Avaliação"
+        verbose_name_plural = "Avaliações"
+        unique_together = ('usuario', 'evento')
+        ordering = ['-data_criacao']
+
+class CategoriaEvento(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    nome = models.CharField(max_length=100, unique=True)
+    descricao = models.TextField(blank=True, null=True)
+    ativo = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Categoria de Evento"
+        verbose_name_plural = "Categorias de Evento"
+        ordering = ['nome']
+
+class FavoritoEvento(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='favoritos')
+    evento = models.ForeignKey('Evento', on_delete=models.CASCADE, related_name='favoritos')
+    data_adicionado = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.usuario.username} favoritou {self.evento.titulo}'
+
+    class Meta:
+        unique_together = ('usuario', 'evento')
+        verbose_name = "Favorito de Evento"
+        verbose_name_plural = "Favoritos de Eventos"
+        ordering = ['-data_adicionado']
 

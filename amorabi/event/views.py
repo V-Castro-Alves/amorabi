@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def event_list(request):
-    eventos = Evento.objects.filter(status__in=['nao_iniciado', 'ativo'])
-    return render(request, 'event/evento_lista.html', {'eventos': eventos})
+    eventos = Evento.objects.filter(ativo=True).order_by('-data_inicio')
+    return render(request, 'event/lista_todos.html', {'eventos': eventos})
 
 @login_required
 def evento_create(request):
@@ -19,4 +19,4 @@ def evento_create(request):
             return redirect('event:event_list')
     else:
         form = EventoForm()
-    return render(request, 'event/evento_form.html', {'form': form})
+    return render(request, 'event/cadastro.html', {'form': form})
