@@ -5,7 +5,7 @@ from django.http import HttpResponseForbidden
 from .forms import CustomUserCreationForm
 from .models import CustomUser, StatusUsuario
 
-def register(request):
+def cadastrar(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -28,7 +28,7 @@ def aprovacoes(request):
     return render(request, 'account/aprovacao.html', {'users': users_sem_aprovacao})
 
 @login_required
-def aprovacao_detalhe(request, user_uuid):
+def aprovar_usuario(request, user_uuid):
     if not hasattr(request.user, 'role') or request.user.role != 'admin':
         return HttpResponseForbidden("Acesso restrito a administradores.")
     user = get_object_or_404(CustomUser, uuid=user_uuid, is_superuser=False)
@@ -59,3 +59,9 @@ def resetar_senha(request):
         messages.success(request, 'Instruções de redefinição de senha enviadas para o seu e-mail.')
         return redirect('account:login')
     return render(request, 'account/resetar_senha.html')
+
+def perfil(request):
+    if not request.user.is_authenticated:
+        return redirect('account:login')
+
+    return render(request, 'account/perfil.html')

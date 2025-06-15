@@ -1,0 +1,216 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Bem-vindo à Amorabi{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/landing-custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section com background gradient e animação sutil -->
+<section class="hero-section position-relative overflow-hidden">
+    <div class="container py-5 text-center">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-lg-start mb-4 mb-lg-0">
+                <h1 class="display-3 fw-bold text-gradient">AMORABI</h1>
+                <p class="lead mb-4">
+                    <span class="badge bg-primary mb-2">PONTO DE CULTURA 🥁🎨🎭</span><br>
+                    Associação dos Moradores e Amigos do <span class="text-primary">#bairroitinga</span><br>
+                    <strong>44 Anos</strong> de Organização Comunitária<br>
+                    <strong>25 Anos</strong> de Arte e Cultura na Periferia
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-start justify-content-center">
+                    <a href="{% url 'event:event_list' %}" class="btn btn-primary btn-lg">
+                        <i class="bi bi-calendar-event me-2"></i>Ver Eventos
+                    </a>
+                    <a href="{% url 'account:cadastrar' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-person-plus me-2"></i>Cadastre-se
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-image-container position-relative">
+                    <!-- Aqui você pode adicionar uma imagem relevante que represente a comunidade -->
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-4 hero-shape"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-divider-bottom"></div>
+</section>
+
+<!-- Sobre Section com cards elegantes -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">Sobre a Amorabi</span>
+        </h2>
+        <div class="row gx-5">
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body p-4">
+                        <div class="feature-icon-wrapper mb-3">
+                            <i class="bi bi-house-heart text-primary fs-1"></i>
+                        </div>
+                        <h3 class="card-title h4">Nossa História</h3>
+                        <p class="card-text">
+                            A Amorabi é uma associação dedicada à promoção da cultura, arte e organização 
+                            comunitária no bairro Itinga. Há mais de quatro décadas, fortalecemos laços e 
+                            oferecemos oportunidades de aprendizado, lazer e desenvolvimento para todos os moradores.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body p-4">
+                        <div class="feature-icon-wrapper mb-3">
+                            <i class="bi bi-stars text-primary fs-1"></i>
+                        </div>
+                        <h3 class="card-title h4">Nossa Missão</h3>
+                        <p class="card-text">
+                            Transformar vidas através da arte, cultura e educação, fortalecendo os laços 
+                            comunitários e promovendo o desenvolvimento social. Acreditamos que a cultura 
+                            é um direito de todos e um caminho para a construção de uma sociedade mais justa.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Funcionalidades Section com cards interativos -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">O que você pode fazer aqui?</span>
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle feature-icon mx-auto mb-3">
+                            <i class="bi bi-calendar-event"></i>
+                        </div>
+                        <h5 class="card-title">Ver Eventos</h5>
+                        <p class="card-text">Confira palestras, cursos e workshops promovidos pela associação.</p>
+                        <a href="{% url 'event:event_list' %}" class="btn btn-sm btn-primary mt-3">Explorar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle feature-icon mx-auto mb-3">
+                            <i class="bi bi-person-plus"></i>
+                        </div>
+                        <h5 class="card-title">Inscrever-se</h5>
+                        <p class="card-text">Moradores podem se cadastrar e participar dos eventos disponíveis.</p>
+                        <a href="{% url 'account:cadastrar' %}" class="btn btn-sm btn-primary mt-3">Cadastrar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle feature-icon mx-auto mb-3">
+                            <i class="bi bi-people"></i>
+                        </div>
+                        <h5 class="card-title">Fortalecer a Comunidade</h5>
+                        <p class="card-text">Participe, compartilhe experiências e ajude a construir um bairro mais unido.</p>
+                        <a href="#" class="btn btn-sm btn-primary mt-3">Saiba mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Galeria ou Destaques (Opcional) -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">Destaques</span>
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Oficina de Percussão</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Teatro Comunitário</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Dança</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Artes Visuais</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contato Section com design moderno e estilização -->
+<section class="py-5 bg-gradient position-relative">
+    <div class="container text-center py-4">
+        <h2 class="fw-bold mb-4 text-white">Contato</h2>
+        <p class="mb-4 text-white">Fale com a gente pelas redes sociais:</p>
+        <div class="d-flex flex-wrap justify-content-center gap-4">
+            <a href="https://www.facebook.com/amorabi" target="_blank" class="social-link facebook">
+                <i class="bi bi-facebook"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/amorabi" target="_blank" class="social-link instagram">
+                <i class="bi bi-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/SEUNUMERO" target="_blank" class="social-link whatsapp">
+                <i class="bi bi-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Adiciona classes aos elementos quando eles entram na viewport (efeito de aparecimento)
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        document.querySelectorAll('.card, .gallery-item, h2, .social-link').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}

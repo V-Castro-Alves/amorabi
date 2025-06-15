@@ -111,18 +111,3 @@ class CategoriaEvento(models.Model):
         verbose_name_plural = "Categorias de Evento"
         ordering = ['nome']
 
-class FavoritoEvento(models.Model):
-    uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
-    usuario = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='favoritos')
-    evento = models.ForeignKey('Evento', on_delete=models.CASCADE, related_name='favoritos')
-    data_adicionado = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f'{self.usuario.username} favoritou {self.evento.titulo}'
-
-    class Meta:
-        unique_together = ('usuario', 'evento')
-        verbose_name = "Favorito de Evento"
-        verbose_name_plural = "Favoritos de Eventos"
-        ordering = ['-data_adicionado']
-
