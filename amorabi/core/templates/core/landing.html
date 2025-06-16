@@ -9,30 +9,32 @@
 
 {% block content %}
 <!-- Hero Section com background gradient e animação sutil -->
-<section class="hero-section position-relative overflow-hidden">
-    <div class="container py-5 text-center">
+<section class="hero-section position-relative">
+    <div class="container py-5 hero-content">
         <div class="row align-items-center">
-            <div class="col-lg-6 text-lg-start mb-4 mb-lg-0">
-                <h1 class="display-3 fw-bold text-gradient">AMORABI</h1>
-                <p class="lead mb-4">
-                    <span class="badge bg-primary mb-2">PONTO DE CULTURA 🥁🎨🎭</span><br>
-                    Associação dos Moradores e Amigos do <span class="text-primary">#bairroitinga</span><br>
-                    <strong>44 Anos</strong> de Organização Comunitária<br>
-                    <strong>25 Anos</strong> de Arte e Cultura na Periferia
+            <div class="col-lg-6 text-lg-start mb-5 mb-lg-0">
+                <span class="hero-badge fade-in">
+                    <i class="bi bi-music-note-beamed me-1"></i>PONTO DE CULTURA 🥁🎨🎭
+                </span>
+                <h1 class="hero-title text-gradient fw-bold fade-in">AMORABI</h1>
+                <h2 class="hero-subtitle fw-bold mb-4 fade-in">Associação dos Moradores e Amigos do Bairro Itinga</h2>
+                <p class="hero-text mb-4 fade-in">
+                    <strong class="hero-highlight">44 Anos</strong> de Organização Comunitária<br>
+                    <strong class="hero-highlight">25 Anos</strong> de Arte e Cultura na Periferia<br><br>
+                    Artesanato, Dança, Música, Teatro e diversas atividades culturais que desenvolvem a cultura local, transformando a relação dos moradores com a arte e estimulando o senso crítico e estético da comunidade.
                 </p>
-                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-start justify-content-center">
-                    <a href="{% url 'event:event_list' %}" class="btn btn-primary btn-lg">
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-lg-start justify-content-center fade-in">
+                    <a href="{% url 'event:event_list' %}" class="btn hero-btn hero-btn-primary">
                         <i class="bi bi-calendar-event me-2"></i>Ver Eventos
                     </a>
-                    <a href="{% url 'account:cadastrar' %}" class="btn btn-outline-primary btn-lg">
+                    <a href="{% url 'account:cadastrar' %}" class="btn hero-btn hero-btn-outline">
                         <i class="bi bi-person-plus me-2"></i>Cadastre-se
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="hero-image-container position-relative">
-                    <!-- Aqui você pode adicionar uma imagem relevante que represente a comunidade -->
-                    <div class="rounded-circle bg-primary bg-opacity-10 p-4 hero-shape"></div>
+                <div class="hero-image-container position-relative fade-in">
+                    <img src="{% static 'image/amorabi-hero.jpeg' %}" alt="amorabi-hero" class="img-fluid hero-image">
                 </div>
             </div>
         </div>
@@ -41,7 +43,7 @@
 </section>
 
 <!-- Sobre Section com cards elegantes -->
-<section class="py-5">
+<section class="py-5 about-section">
     <div class="container">
         <h2 class="fw-bold text-center mb-5 position-relative">
             <span class="underline-highlight">Sobre a Amorabi</span>
@@ -82,7 +84,7 @@
 </section>
 
 <!-- Funcionalidades Section com cards interativos -->
-<section class="py-5 bg-light">
+<section class="py-5 features-section">
     <div class="container">
         <h2 class="fw-bold text-center mb-5 position-relative">
             <span class="underline-highlight">O que você pode fazer aqui?</span>
@@ -90,37 +92,37 @@
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center p-4">
+                    <div class="card-body text-center p-4 d-flex flex-column">
                         <div class="rounded-circle feature-icon mx-auto mb-3">
                             <i class="bi bi-calendar-event"></i>
                         </div>
                         <h5 class="card-title">Ver Eventos</h5>
                         <p class="card-text">Confira palestras, cursos e workshops promovidos pela associação.</p>
-                        <a href="{% url 'event:event_list' %}" class="btn btn-sm btn-primary mt-3">Explorar</a>
+                        <a href="{% url 'event:event_list' %}" class="btn btn-sm btn-primary mt-auto feature-btn">Explorar</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center p-4">
+                    <div class="card-body text-center p-4 d-flex flex-column">
                         <div class="rounded-circle feature-icon mx-auto mb-3">
                             <i class="bi bi-person-plus"></i>
                         </div>
                         <h5 class="card-title">Inscrever-se</h5>
                         <p class="card-text">Moradores podem se cadastrar e participar dos eventos disponíveis.</p>
-                        <a href="{% url 'account:cadastrar' %}" class="btn btn-sm btn-primary mt-3">Cadastrar</a>
+                        <a href="{% url 'account:cadastrar' %}" class="btn btn-sm btn-primary mt-auto feature-btn">Cadastrar</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card border-0 shadow-sm h-100 hover-card">
-                    <div class="card-body text-center p-4">
+                    <div class="card-body text-center p-4 d-flex flex-column">
                         <div class="rounded-circle feature-icon mx-auto mb-3">
                             <i class="bi bi-people"></i>
                         </div>
                         <h5 class="card-title">Fortalecer a Comunidade</h5>
                         <p class="card-text">Participe, compartilhe experiências e ajude a construir um bairro mais unido.</p>
-                        <a href="#" class="btn btn-sm btn-primary mt-3">Saiba mais</a>
+                        <a href="#" class="btn btn-sm btn-primary mt-auto feature-btn">Saiba mais</a>
                     </div>
                 </div>
             </div>
@@ -172,22 +174,29 @@
 </section>
 
 <!-- Contato Section com design moderno e estilização -->
-<section class="py-5 bg-gradient position-relative">
+<section class="py-1 contact-section position-relative">
     <div class="container text-center py-4">
         <h2 class="fw-bold mb-4 text-white">Contato</h2>
-        <p class="mb-4 text-white">Fale com a gente pelas redes sociais:</p>
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <a href="https://www.facebook.com/amorabi" target="_blank" class="social-link facebook">
+            <a href="https://www.facebook.com/AssociacaoItinga/" target="_blank" class="social-link facebook">
                 <i class="bi bi-facebook"></i>
                 <span>Facebook</span>
             </a>
-            <a href="https://www.instagram.com/amorabi" target="_blank" class="social-link instagram">
+            <a href="https://www.instagram.com/amorabi_itinga/" target="_blank" class="social-link instagram">
                 <i class="bi bi-instagram"></i>
                 <span>Instagram</span>
             </a>
-            <a href="https://wa.me/SEUNUMERO" target="_blank" class="social-link whatsapp">
+            <a href="https://wa.me/47991987821" target="_blank" class="social-link whatsapp">
                 <i class="bi bi-whatsapp"></i>
                 <span>WhatsApp</span>
+            </a>
+            <a href="mailto:cultura.amorabi@gmail.com" target="_blank" class="social-link email">
+                <i class="bi bi-envelope"></i>
+                <span>Email</span>
+            </a>
+            <a href="https://www.google.com/maps/place/Associa%C3%A7%C3%A3o+dos+Moradores+do+Bairro+Itinga/@-26.3786562,-48.8323215,19.12z/data=!4m6!3m5!1s0x94deb6e5eab5752b:0x478a427c177e35dc!8m2!3d-26.3792156!4d-48.8316644!16s%2Fg%2F1tdq28np?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="social-link location">
+                <i class="bi bi-geo-alt"></i>
+                <span>Localização</span>
             </a>
         </div>
     </div>

@@ -21,7 +21,7 @@ class Evento(models.Model):
     )
     local = models.CharField(max_length=200)
     ativo = models.BooleanField(default=True)
-    categoria = models.ForeignKey('CategoriaEvento', on_delete=models.SET_NULL, null=True, blank=True, related_name='eventos')
+    categorias = models.ManyToManyField('CategoriaEvento', blank=True, related_name='eventos')
 
     def __str__(self):
         return self.titulo
