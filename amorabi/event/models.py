@@ -4,6 +4,7 @@ import uuid
 class Evento(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     titulo = models.CharField(max_length=200)
+    capa = models.ImageField(upload_to='events/', blank=True, null=True)
     descricao = models.TextField()
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()

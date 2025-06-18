@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento, CategoriaEvento
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required
@@ -55,3 +55,8 @@ def evento_create(request):
     else:
         form = EventoForm()
     return render(request, 'event/cadastro.html', {'form': form})
+
+@login_required
+def evento_detail(request, uuid):
+    evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
+    return render(request, 'event/evento_detalhe.html', {'evento': evento})
