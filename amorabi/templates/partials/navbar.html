@@ -29,8 +29,23 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Perfil</a>
                     </li>
+                    {% if perms.event.add_evento %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'event:evento_create' %}">Cadastrar Novo Evento</a>
+                        </li>
+                    {% endif %}
+                    {% if perms.account.add_statususuario %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'account:aprovacoes' %}">Gerenciar Autorizações de Usuários</a>
+                        </li>
+                    {% endif %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account:logout' %}">Sair</a>
+                        <form method="post" action="{% url 'account:logout' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">
+                                Sair
+                            </button>
+                        </form>
                     </li>
                 {% else %}
                     <li class="nav-item">

@@ -61,19 +61,22 @@
     {% for evento in eventos %}
     <div class="col d-flex">
         <div class="card shadow-sm mb-4 flex-fill hover-card">
+            {# Show capa if exists #}
+            {% if evento.capa %}
+                <img src="{{ evento.capa.url }}" class="card-img-top" alt="Capa de {{ evento.titulo }}" style="object-fit:cover; height:180px;">
+            {% endif %}
             <div class="card-body d-flex flex-column">
                 <h5 class="card-title fw-bold text-gradient">{{ evento.titulo }}</h5>
                 <p class="card-text small mb-2"><i class="bi bi-calendar-event"></i> {{ evento.data_inicio|date:'d/m/Y H:i' }} - {{ evento.data_fim|date:'d/m/Y H:i' }}</p>
                 <p class="card-text mb-2"><i class="bi bi-geo-alt"></i> {{ evento.local }}</p>
                 <p class="card-text mb-2"><i class="bi bi-person"></i> Responsável: {{ evento.responsavel.username }}</p>
                 <p class="card-text mb-2"><i class="bi bi-people"></i> Vagas: {{ evento.capacidade_participantes }}</p>
-
                 <span class="badge bg-secondary mb-2">{{ evento.get_status_display }}</span>
                 <a href="{% url 'event:evento_detail' evento.uuid %}" class="btn btn-outline-primary btn-sm mt-auto">Detalhes</a>
             </div>
         </div>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 {% else %}
 <div class="alert alert-info text-center mt-4">Nenhum evento disponível</div>

@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.contrib.auth.decorators import login_required, permission_required
 from .forms import CustomUserCreationForm
 from .models import CustomUser, StatusUsuario
 
@@ -17,20 +16,18 @@ def cadastrar(request):
     return render(request, 'account/cadastro.html', {'form': form})
 
 @login_required
+@permission_required('account.add_statususuario', raise_exception=True)
 def aprovacoes(request):
-    if not hasattr(request.user, 'role') or request.user.role != 'admin':
-        return HttpResponseForbidden("Acesso restrito a administradores.")
     users_sem_aprovacao = CustomUser.objects.filter(
         is_superuser=False
-    ).exclude(
-        aprovacoes__isnull=False
+    ).filter(
+        status_usuario__isnull=True
     )
     return render(request, 'account/aprovacao.html', {'users': users_sem_aprovacao})
 
 @login_required
+@permission_required('account.add_statususuario', raise_exception=True)
 def aprovar_usuario(request, user_uuid):
-    if not hasattr(request.user, 'role') or request.user.role != 'admin':
-        return HttpResponseForbidden("Acesso restrito a administradores.")
     user = get_object_or_404(CustomUser, uuid=user_uuid, is_superuser=False)
     if request.method == 'POST':
         action = request.POST.get('action')
@@ -60,8 +57,8 @@ def resetar_senha(request):
         return redirect('account:login')
     return render(request, 'account/resetar_senha.html')
 
+@login_required
 def perfil(request):
-    if not request.user.is_authenticated:
-        return redirect('account:login')
+
 
     return render(request, 'account/perfil.html')

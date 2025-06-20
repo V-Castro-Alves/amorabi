@@ -3,14 +3,20 @@
 {% block title %}Detalhes do Evento{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2>{{ evento.titulo }}</h2>
-    <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
-    <p><strong>Data de início:</strong> {{ evento.data_inicio|date:"d/m/Y H:i" }}</p>
-    <p><strong>Data de término:</strong> {{ evento.data_fim|date:"d/m/Y H:i" }}</p>
-    <p><strong>Local:</strong> {{ evento.local }}</p>
-    <p><strong>Status:</strong> {{ evento.get_status_display }}</p>
-    <p><strong>Responsável:</strong> {{ evento.responsavel.username }}</p>
-    <a href="{% url 'event:event_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+<div class="card mt-4">
+    <div class="card-header bg-primary text-white">
+        <h1 class="card-title">{{ evento.titulo }}</h1>
+    </div>
+    <div class="card-body">
+        <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+        <p><strong>Data de início:</strong> {{ evento.data_inicio|date:"d/m/Y H:i" }}</p>
+        <p><strong>Data de término:</strong> {{ evento.data_fim|date:"d/m/Y H:i" }}</p>
+        <p><strong>Categoria:</strong> {{ evento.categorias.all|join:", " }}</p>
+        <p><strong>Data Limite Inscrição:</strong> {{ evento.data_limite_inscricao|date:"d/m/Y H:i" }}</p>
+        <p><strong>Local:</strong> {{ evento.local }}</p>
+        <p><strong>Status:</strong> {{ evento.get_status_display }}</p>
+        <p><strong>Responsável:</strong> {{ evento.responsavel.username }}</p>
+        <a href="{% url 'event:event_list' %}" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
 </div>
 {% endblock %}

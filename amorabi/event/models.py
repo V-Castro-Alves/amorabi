@@ -8,7 +8,8 @@ class Evento(models.Model):
     descricao = models.TextField()
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
-    capacidade_participantes = models.IntegerField()
+    capacidade_participantes = models.IntegerField(null=True)
+    data_limite_inscricao = models.DateTimeField()
     responsavel = models.ForeignKey('account.CustomUser', on_delete=models.CASCADE, related_name='eventos_responsavel')
     status = models.CharField(
         max_length=20,

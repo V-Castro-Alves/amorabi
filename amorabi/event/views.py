@@ -46,7 +46,7 @@ def event_list(request):
 @login_required
 def evento_create(request):
     if request.method == 'POST':
-        form = EventoForm(request.POST)
+        form = EventoForm(request.POST, request.FILES)
         if form.is_valid():
             evento = form.save(commit=False)
             evento.responsavel = request.user

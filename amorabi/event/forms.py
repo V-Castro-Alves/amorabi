@@ -5,8 +5,7 @@ class EventoForm(forms.ModelForm):
     class Meta:
         model = Evento
         fields = [
-            'titulo', 'descricao', 'data_inicio', 'data_fim',
-            'capacidade_participantes', 'local'
+            'titulo', 'descricao', 'data_inicio', 'data_fim', 'data_limite_inscricao', 'capa', 'capacidade_participantes', 'local'
         ]
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
@@ -19,6 +18,11 @@ class EventoForm(forms.ModelForm):
                 attrs={'class': 'form-control', 'placeholder': 'dd/mm/yyyy HH:MM'},
                 format='%d/%m/%Y %H:%M'
             ),
+            'data_limite_inscricao': forms.DateTimeInput(
+                attrs={'class': 'form-control', 'placeholder': 'dd/mm/yyyy HH:MM'},
+                format='%d/%m/%Y %H:%M'
+            ),
+            'capa': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),
             'capacidade_participantes': forms.NumberInput(attrs={'class': 'form-control', 'min': 1}),
             'local': forms.TextInput(attrs={'class': 'form-control'}),
         }
