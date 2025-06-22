@@ -1,52 +1,5 @@
-:root {
-    --bs-primary: #9a0000;
-    --bs-secondary: #009a9a;
-}
-
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     line-height: 1.6;
-}
-
-/* Override Bootstrap's primary color classes */
-.bg-primary {
-    background-color: var(--bs-primary) !important;
-}
-
-.text-primary {
-    color: var(--bs-primary) !important;
-}
-
-.btn-primary {
-    background-color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-}
-
-.btn-outline-primary {
-    color: var(--bs-primary) !important;
-    border-color: var(--bs-primary) !important;
-}
-
-.btn-outline-primary:hover {
-    background-color: var(--bs-primary) !important;
-    color: white !important;
-}
-
-/* Override Bootstrap's secondary color classes */
-.bg-secondary {
-    background-color: var(--bs-secondary) !important;
-}
-
-.text-secondary {
-    color: var(--bs-secondary) !important;
-}
-
-.btn-secondary {
-    background-color: var(--bs-secondary) !important;
-    border-color: var(--bs-secondary) !important;
-}
-
-.navbar .nav-link:hover {
-    color: var(--bs-primary) !important;
 }
