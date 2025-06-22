@@ -39,6 +39,12 @@ class Evento(models.Model):
         from django.urls import reverse
         return reverse('evento_detail', args=[str(self.pk)])
 
+    def vagas_disponiveis(self):
+        inscritos = self.participacoes.filter(status='confirmada', ativo=True).count()
+        if self.capacidade_participantes is not None:
+            return max(self.capacidade_participantes - inscritos, 0)
+        return None
+
     class Meta:
         verbose_name = "Evento"
         verbose_name_plural = "Eventos"

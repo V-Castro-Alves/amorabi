@@ -128,37 +128,6 @@
     transform: perspective(1000px) rotateY(0);
 }
 
-.hero-btn {
-    padding: 12px 24px;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-}
-
-.hero-btn-primary {
-    background-color: #009a9a;
-    border-color: #009a9a;
-}
-
-.hero-btn-primary:hover {
-    background-color: #005a5a;
-    border-color: #005a5a;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
-.hero-btn-outline {
-    color: white;
-    border-color: white;
-}
-
-.hero-btn-outline:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: white;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-}
-
 .shape-divider-bottom {
     position: absolute;
     bottom: 0;
@@ -229,27 +198,6 @@
     border-radius: 2px;
 }
 
-/* Galeria */
-.gallery-item {
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 12px;
-}
-
-.gallery-item:hover {
-    transform: scale(1.03);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-.gallery-placeholder {
-    height: 180px;
-    overflow: hidden;
-    border-radius: 8px;
-    background-color: rgba(0, 154, 154, 0.1);
-}
-
-/* Background gradiente para seção de contato */
 .contact-section {
     background: linear-gradient(135deg, #a12e8d 0%, #4d0000 100%);
 }
@@ -296,44 +244,6 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     color: white;
-}
-
-/* Estilos da seção sobre */
-.about-section {
-    background-color: #fff;
-}
-
-.card-title {
-    color: #4d0000;
-    font-weight: 600;
-}
-
-/* Estilos da seção de funcionalidades */
-.features-section {
-    background-color: #f9f9f9;
-}
-
-.feature-btn {
-    transition: background 0.3s, color 0.3s, transform 0.2s;
-}
-
-.feature-btn:hover {
-    background: #005a5a;
-    color: #fff;
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
-}
-
-.btn-primary,
-.btn-sm {
-    background-color: #009a9a;
-    border-color: #009a9a;
-}
-
-.btn-primary:hover,
-.btn-sm:hover {
-    background-color: #005a5a;
-    border-color: #005a5a;
 }
 
 /* Responsividade */

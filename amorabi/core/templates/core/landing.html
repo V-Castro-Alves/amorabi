@@ -24,17 +24,17 @@
                     Artesanato, Dança, Música, Teatro e diversas atividades culturais que desenvolvem a cultura local, transformando a relação dos moradores com a arte e estimulando o senso crítico e estético da comunidade.
                 </p>
                 <div class="d-flex flex-column flex-sm-row gap-3 justify-content-lg-start justify-content-center fade-in">
-                    <a href="{% url 'event:event_list' %}" class="btn hero-btn hero-btn-primary">
+                    <a href="{% url 'event:event_list' %}" class="btn btn-primary btn-lg rounded-pill shadow-sm">
                         <i class="bi bi-calendar-event me-2"></i>Ver Eventos
                     </a>
-                    <a href="{% url 'account:cadastrar' %}" class="btn hero-btn hero-btn-outline">
+                    <a href="{% url 'account:cadastrar' %}" class="btn btn-outline-light btn-lg rounded-pill shadow-sm">
                         <i class="bi bi-person-plus me-2"></i>Cadastre-se
                     </a>
                 </div>
             </div>
             <div class="col-lg-6 d-none d-lg-block">
-                <div class="hero-image-container position-relative fade-in">
-                    <img src="{% static 'image/amorabi-hero.jpeg' %}" alt="amorabi-hero" class="img-fluid hero-image">
+                <div class="position-relative fade-in">
+                    <img src="{% static 'image/amorabi-hero.jpeg' %}" alt="amorabi-hero" class="img-fluid rounded-4 shadow-lg hero-image">
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
 </section>
 
 <!-- Sobre Section com cards elegantes -->
-<section class="py-5 about-section">
+<section class="py-5 about-section bg-white">
     <div class="container">
         <h2 class="fw-bold text-center mb-5 position-relative">
             <span class="underline-highlight">Sobre a Amorabi</span>
@@ -84,7 +84,7 @@
 </section>
 
 <!-- Funcionalidades Section com cards interativos -->
-<section class="py-5 features-section">
+<section class="py-5 features-section bg-light">
     <div class="container">
         <h2 class="fw-bold text-center mb-5 position-relative">
             <span class="underline-highlight">O que você pode fazer aqui?</span>
@@ -98,7 +98,7 @@
                         </div>
                         <h5 class="card-title">Ver Eventos</h5>
                         <p class="card-text">Confira palestras, cursos e workshops promovidos pela associação.</p>
-                        <a href="{% url 'event:event_list' %}" class="btn btn-sm btn-primary mt-auto feature-btn">Explorar</a>
+                        <a href="{% url 'event:event_list' %}" class="btn btn-primary btn-sm mt-auto feature-btn rounded-pill">Explorar</a>
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                         </div>
                         <h5 class="card-title">Inscrever-se</h5>
                         <p class="card-text">Moradores podem se cadastrar e participar dos eventos disponíveis.</p>
-                        <a href="{% url 'account:cadastrar' %}" class="btn btn-sm btn-primary mt-auto feature-btn">Cadastrar</a>
+                        <a href="{% url 'account:cadastrar' %}" class="btn btn-primary btn-sm mt-auto feature-btn rounded-pill">Cadastrar</a>
                     </div>
                 </div>
             </div>
@@ -122,7 +122,7 @@
                         </div>
                         <h5 class="card-title">Fortalecer a Comunidade</h5>
                         <p class="card-text">Participe, compartilhe experiências e ajude a construir um bairro mais unido.</p>
-                        <a href="#" class="btn btn-sm btn-primary mt-auto feature-btn">Saiba mais</a>
+                        <a href="#" class="btn btn-primary btn-sm mt-auto feature-btn rounded-pill">Saiba mais</a>
                     </div>
                 </div>
             </div>
@@ -138,34 +138,26 @@
         </h2>
         <div class="row g-4">
             <div class="col-md-3 col-6">
-                <div class="gallery-item rounded shadow-sm">
-                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
-                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
-                    </div>
+                <div class="gallery-item rounded-3 shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center"></div>
                     <p class="mt-2 text-center fw-medium">Oficina de Percussão</p>
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                <div class="gallery-item rounded shadow-sm">
-                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
-                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
-                    </div>
+                <div class="gallery-item rounded-3 shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center"></div>
                     <p class="mt-2 text-center fw-medium">Teatro Comunitário</p>
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                <div class="gallery-item rounded shadow-sm">
-                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
-                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
-                    </div>
+                <div class="gallery-item rounded-3 shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center"></div>
                     <p class="mt-2 text-center fw-medium">Dança</p>
                 </div>
             </div>
             <div class="col-md-3 col-6">
-                <div class="gallery-item rounded shadow-sm">
-                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
-                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
-                    </div>
+                <div class="gallery-item rounded-3 shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center"></div>
                     <p class="mt-2 text-center fw-medium">Artes Visuais</p>
                 </div>
             </div>
@@ -178,23 +170,23 @@
     <div class="container text-center py-4">
         <h2 class="fw-bold mb-4 text-white">Contato</h2>
         <div class="d-flex flex-wrap justify-content-center gap-4">
-            <a href="https://www.facebook.com/AssociacaoItinga/" target="_blank" class="social-link facebook">
+            <a href="https://www.facebook.com/AssociacaoItinga/" target="_blank" class="social-link facebook d-inline-flex align-items-center gap-2">
                 <i class="bi bi-facebook"></i>
                 <span>Facebook</span>
             </a>
-            <a href="https://www.instagram.com/amorabi_itinga/" target="_blank" class="social-link instagram">
+            <a href="https://www.instagram.com/amorabi_itinga/" target="_blank" class="social-link instagram d-inline-flex align-items-center gap-2">
                 <i class="bi bi-instagram"></i>
                 <span>Instagram</span>
             </a>
-            <a href="https://wa.me/47991987821" target="_blank" class="social-link whatsapp">
+            <a href="https://wa.me/47991987821" target="_blank" class="social-link whatsapp d-inline-flex align-items-center gap-2">
                 <i class="bi bi-whatsapp"></i>
                 <span>WhatsApp</span>
             </a>
-            <a href="mailto:cultura.amorabi@gmail.com" target="_blank" class="social-link email">
+            <a href="mailto:cultura.amorabi@gmail.com" target="_blank" class="social-link email d-inline-flex align-items-center gap-2">
                 <i class="bi bi-envelope"></i>
                 <span>Email</span>
             </a>
-            <a href="https://www.google.com/maps/place/Associa%C3%A7%C3%A3o+dos+Moradores+do+Bairro+Itinga/@-26.3786562,-48.8323215,19.12z/data=!4m6!3m5!1s0x94deb6e5eab5752b:0x478a427c177e35dc!8m2!3d-26.3792156!4d-48.8316644!16s%2Fg%2F1tdq28np?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="social-link location">
+            <a href="https://www.google.com/maps/place/Associa%C3%A7%C3%A3o+dos+Moradores+do+Bairro+Itinga/@-26.3786562,-48.8323215,19.12z/data=!4m6!3m5!1s0x94deb6e5eab5752b:0x478a427c177e35dc!8m2!3d-26.3792156!4d-48.8316644!16s%2Fg%2F1tdq28np?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="social-link location d-inline-flex align-items-center gap-2">
                 <i class="bi bi-geo-alt"></i>
                 <span>Localização</span>
             </a>

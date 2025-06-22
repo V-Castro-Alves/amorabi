@@ -4,7 +4,7 @@ from .forms import EventoForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.utils import timezone
-
+from django.db.models import Count, Q, F, IntegerField, ExpressionWrapper
 
 def event_list(request):
     eventos = Evento.objects.filter(ativo=True)
@@ -39,6 +39,16 @@ def event_list(request):
             Participacao.objects.filter(usuario=request.user, evento__in=eventos)
             .values_list('evento__uuid', flat=True)
         )
+
+    # Annotate with vagas_disponiveis
+    eventos = eventos.annotate(
+        inscritos_confirmados=Count('participacoes', filter=Q(participacoes__status='confirmada', participacoes__ativo=True)),
+    ).annotate(
+        vagas_disponiveis=ExpressionWrapper(
+            F('capacidade_participantes') - F('inscritos_confirmados'),
+            output_field=IntegerField()
+        )
+    )
 
     return render(request, 'event/lista_todos.html', {
         'eventos': eventos,
