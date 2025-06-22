@@ -16,6 +16,16 @@
         <p><strong>Local:</strong> {{ evento.local }}</p>
         <p><strong>Status:</strong> {{ evento.get_status_display }}</p>
         <p><strong>Responsável:</strong> {{ evento.responsavel.username }}</p>
+        {% if inscrito %}
+            <div class="alert alert-info mt-3">Você já está inscrito neste evento.</div>
+        {% elif not inscricao_aberta %}
+            <div class="alert alert-warning mt-3">O prazo de inscrição para este evento já terminou.</div>
+        {% else %}
+            <form method="post" action="{% url 'event:participar_evento' evento.uuid %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-success mt-3">Inscrever-se</button>
+            </form>
+        {% endif %}
         <a href="{% url 'event:event_list' %}" class="btn btn-secondary mt-3">Voltar</a>
     </div>
 </div>

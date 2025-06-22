@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Evento, CategoriaEvento
+from .models import Evento, CategoriaEvento, Participacao
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.utils import timezone
 
 def event_list(request):
     eventos = Evento.objects.filter(ativo=True)
@@ -29,9 +31,18 @@ def event_list(request):
     else:
         eventos = eventos.order_by('-data_inicio')
 
+    # Eventos em que o usuário está inscrito
+    eventos_inscritos = set()
+    if request.user.is_authenticated:
+        eventos_inscritos = set(
+            Participacao.objects.filter(usuario=request.user, evento__in=eventos)
+            .values_list('evento__uuid', flat=True)
+        )
+
     return render(request, 'event/lista_todos.html', {
         'eventos': eventos,
         'categorias': categorias,
+        'eventos_inscritos': eventos_inscritos,
         'current_filters': {
             'titulo': titulo,
             'categoria': categoria,
@@ -57,4 +68,29 @@ def evento_create(request):
 @login_required
 def evento_detail(request, uuid):
     evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
-    return render(request, 'event/evento_detalhe.html', {'evento': evento})
+    inscrito = Participacao.objects.filter(usuario=request.user, evento=evento).exists()
+    inscricao_aberta = timezone.now() <= evento.data_limite_inscricao
+    return render(request, 'event/evento_detalhe.html', {
+        'evento': evento,
+        'inscrito': inscrito,
+        'inscricao_aberta': inscricao_aberta,
+    })
+
+@login_required
+def participar_evento(request, uuid):
+    evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
+    user = request.user
+
+    # Check if already registered
+    if Participacao.objects.filter(usuario=user, evento=evento).exists():
+        messages.warning(request, "Você já está inscrito neste evento.")
+        return redirect('event:evento_detail', uuid=evento.uuid)
+
+    # Check if registration is still open
+    if timezone.now() > evento.data_limite_inscricao:
+        messages.error(request, "O prazo de inscrição para este evento já terminou.")
+        return redirect('event:evento_detail', uuid=evento.uuid)
+
+    Participacao.objects.create(usuario=user, evento=evento)
+    messages.success(request, "Inscrição realizada com sucesso!")
+    return redirect('event:evento_detail', uuid=evento.uuid)
