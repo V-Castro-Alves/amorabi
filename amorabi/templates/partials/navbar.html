@@ -39,14 +39,14 @@
                             <a class="nav-link" href="{% url 'account:aprovacoes' %}">Gerenciar Autorizações de Usuários</a>
                         </li>
                     {% endif %}
-                    <li class="nav-item">
+                        <li class="nav-item">
                         <form method="post" action="{% url 'account:logout' %}" style="display:inline;">
                             {% csrf_token %}
-                            <button type="submit" class="nav-link btn btn-link" style="padding: 0; border: none; background: none;">
+                                <button type="submit" class="nav-link bg-transparent border-0" style="cursor: pointer;">
                                 Sair
                             </button>
                         </form>
-                    </li>
+                        </li>
                 {% else %}
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'account:login' %}">Entrar</a>

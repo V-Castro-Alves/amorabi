@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento, CategoriaEvento, Participacao
 from .forms import EventoForm
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from django.utils import timezone
+
 
 def event_list(request):
     eventos = Evento.objects.filter(ativo=True)
@@ -53,6 +54,7 @@ def event_list(request):
     })
 
 @login_required
+@permission_required('event.add_evento', raise_exception=True)
 def evento_create(request):
     if request.method == 'POST':
         form = EventoForm(request.POST, request.FILES)

@@ -11,15 +11,15 @@ class EventoForm(forms.ModelForm):
             'titulo': forms.TextInput(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'rows': 3}),
             'data_inicio': forms.DateTimeInput(
-                attrs={'class': 'form-control', 'placeholder': 'dd/mm/yyyy HH:MM'},
+                attrs={'class': 'form-control flatpickr-datetime', 'placeholder': 'Selecione a data e hora de início'},
                 format='%d/%m/%Y %H:%M'
             ),
             'data_fim': forms.DateTimeInput(
-                attrs={'class': 'form-control', 'placeholder': 'dd/mm/yyyy HH:MM'},
+                attrs={'class': 'form-control flatpickr-datetime', 'placeholder': 'Selecione a data e hora de fim'},
                 format='%d/%m/%Y %H:%M'
             ),
             'data_limite_inscricao': forms.DateTimeInput(
-                attrs={'class': 'form-control', 'placeholder': 'dd/mm/yyyy HH:MM'},
+                attrs={'class': 'form-control flatpickr-datetime', 'placeholder': 'Selecione a data e hora de limite de inscrição'},
                 format='%d/%m/%Y %H:%M'
             ),
             'capa': forms.ClearableFileInput(attrs={'class': 'form-control-file'}),

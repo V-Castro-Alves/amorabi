@@ -46,3 +46,7 @@ body {
     background-color: var(--bs-secondary) !important;
     border-color: var(--bs-secondary) !important;
 }
+
+.navbar .nav-link:hover {
+    color: var(--bs-primary) !important;
+}
