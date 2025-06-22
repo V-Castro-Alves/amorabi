@@ -2,9 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento, CategoriaEvento
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 
-@login_required
 def event_list(request):
     eventos = Evento.objects.filter(ativo=True)
     categorias = CategoriaEvento.objects.filter(ativo=True)

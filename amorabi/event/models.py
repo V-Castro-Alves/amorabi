@@ -1,10 +1,17 @@
-from django.db import models
 import uuid
+import os
+from django.db import models
+
+def event_image_path(instance, filename):
+    """Generate unique filename using UUID"""
+    ext = filename.split('.')[-1].lower()
+    filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join('events', filename)
 
 class Evento(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
     titulo = models.CharField(max_length=200)
-    capa = models.ImageField(upload_to='events/', blank=True, null=True)
+    capa = models.ImageField(upload_to=event_image_path, blank=True, null=True)
     descricao = models.TextField()
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
