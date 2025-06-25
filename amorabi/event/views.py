@@ -34,10 +34,13 @@ def event_list(request):
         eventos = eventos.order_by('-data_inicio')
 
     # Eventos em que o usuário está inscrito
-    eventos_inscritos = set()
     if request.user.is_authenticated:
         eventos_inscritos = set(
-            Participacao.objects.filter(usuario=request.user, evento__in=eventos)
+            Participacao.objects.filter(
+                usuario=request.user,
+                evento__in=eventos,
+                ativo=True
+            ).exclude(status='cancelada')
             .values_list('evento__uuid', flat=True)
         )
 
@@ -118,7 +121,7 @@ def participar_evento(request, uuid):
             return redirect('event:evento_detail', uuid=evento.uuid)
         # Reativar participação cancelada/inativa
         participacao.ativo = True
-        participacao.status = 'pendente'
+        participacao.status = 'confirmada'
         participacao.data_cancelamento = None
         participacao.motivo_cancelamento = None
         participacao.save()

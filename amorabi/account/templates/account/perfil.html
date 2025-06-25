@@ -30,6 +30,22 @@
         {% else %}
             <div class="alert alert-info mt-3">Você ainda não criou nenhum evento.</div>
         {% endif %}
+        <h3>Eventos Inscrito</h3>
+        {% if eventos_inscrito %}
+            <ul class="list-group">
+                {% for participacao in eventos_inscrito %}
+                <li class="list-group-item">
+                    <h5>{{ participacao.evento.titulo }}</h5>
+                    <p><strong>Descrição:</strong> {{ participacao.evento.descricao|truncatechars:100 }}</p>
+                    <p><strong>Data de início:</strong> {{ participacao.evento.data_inicio|date:"d/m/Y H:i" }}</p>
+                    <p><strong>Status do Evento:</strong> {{ participacao.evento.get_status_display }}</p>
+                    <a href="{% url 'event:evento_detail' participacao.evento.uuid %}" class="btn btn-sm btn-outline-primary">Ver detalhes</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info mt-3">Você ainda não está inscrito em nenhum evento.</div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

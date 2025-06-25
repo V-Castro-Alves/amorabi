@@ -60,4 +60,16 @@ def resetar_senha(request):
 @login_required
 def perfil(request):
     meus_eventos = request.user.eventos_responsavel.all()
-    return render(request, 'account/perfil.html', {'meus_eventos': meus_eventos})
+    eventos_inscrito = (
+        request.user.participacoes
+        .filter(status='confirmada', ativo=True)
+        .select_related('evento')
+    )
+    return render(
+        request,
+        'account/perfil.html',
+        {
+            'meus_eventos': meus_eventos,
+            'eventos_inscrito': eventos_inscrito,
+        }
+    )
