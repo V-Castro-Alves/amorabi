@@ -34,11 +34,12 @@ class Evento(models.Model):
 
     def __str__(self):
         return self.titulo
-
+    
     def get_absolute_url(self):
         from django.urls import reverse
         return reverse('evento_detail', args=[str(self.pk)])
 
+    @property
     def vagas_disponiveis(self):
         inscritos = self.participacoes.filter(status='confirmada', ativo=True).count()
         if self.capacidade_participantes is not None:
