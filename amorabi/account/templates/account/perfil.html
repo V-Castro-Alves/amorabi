@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Meu Perfil{% endblock %}
+
+{% block content %}
+<div class="card mt-4 mb-4">
+    <div class="card-header bg-primary text-white">
+        <h1 class="card-title">Meu Perfil</h1>
+    </div>
+    <div class="card-body">
+        <p><strong>Nome:</strong> {{ request.user.get_full_name }}</p>
+        <p><strong>Usuário:</strong> {{ request.user.username }}</p>
+        <p><strong>Email:</strong> {{ request.user.email }}</p>
+        <p><strong>CPF:</strong> {{ request.user.cpf }}</p>
+        <p><strong>Telefone:</strong> {{ request.user.telefone }}</p>
+        <hr>
+        <h3>Eventos Criados</h3>
+        {% if meus_eventos %}
+            <ul class="list-group">
+                {% for evento in meus_eventos %}
+                <li class="list-group-item">
+                    <h5>{{ evento.titulo }}</h5>
+                    <p><strong>Descrição:</strong> {{ evento.descricao|truncatechars:100 }}</p>
+                    <p><strong>Data de início:</strong> {{ evento.data_inicio|date:"d/m/Y H:i" }}</p>
+                    <p><strong>Status:</strong> {{ evento.get_status_display }}</p>
+                    <a href="{% url 'event:evento_detail' evento.uuid %}" class="btn btn-sm btn-outline-primary">Ver detalhes</a>
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-info mt-3">Você ainda não criou nenhum evento.</div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

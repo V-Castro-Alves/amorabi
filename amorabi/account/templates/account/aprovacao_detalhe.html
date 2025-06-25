@@ -1,15 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Detalhes do Usuário</h2>
-<p>Nome: {{ user.get_full_name }}</p>
-<p>Email: {{ user.email }}</p>
-<p>Telefone: {{ user.telefone }}</p>
-<p>CPF: {{ user.cpf }}</p>
-
-<form method="post">
-  {% csrf_token %}
-  <button type="submit" name="action" value="approve">Aprovar</button>
-  <button type="submit" name="action" value="disapprove">Reprovar</button>
-</form>
+<div class="row justify-content-center">
+  <div class="col-lg-6 col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0 fs-4">Detalhes do Usuário</h2>
+      </div>
+      <div class="card-body">
+        <ul class="list-group list-group-flush mb-4">
+          <li class="list-group-item"><strong>Nome:</strong> {{ user.get_full_name }}</li>
+          <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+          <li class="list-group-item"><strong>Telefone:</strong> {{ user.telefone }}</li>
+          <li class="list-group-item"><strong>CPF:</strong> {{ user.cpf }}</li>
+        </ul>
+        <form method="post" class="d-flex gap-2">
+          {% csrf_token %}
+          <button type="submit" name="action" value="approve" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Aprovar
+          </button>
+          <button type="submit" name="action" value="disapprove" class="btn btn-danger">
+            <i class="bi bi-x-circle"></i> Reprovar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

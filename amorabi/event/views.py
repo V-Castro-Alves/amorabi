@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Evento, CategoriaEvento, Participacao
+from account.models import StatusUsuario
 from .forms import EventoForm
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
@@ -82,10 +83,15 @@ def evento_detail(request, uuid):
     evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
     inscrito = Participacao.objects.filter(usuario=request.user, evento=evento).exists()
     inscricao_aberta = timezone.now() <= evento.data_limite_inscricao
+    # Check if user is approved
+    aprovado = StatusUsuario.objects.filter(
+        usuario=request.user, status='aprovado', ativo=True
+    ).exists()
     return render(request, 'event/evento_detalhe.html', {
         'evento': evento,
         'inscrito': inscrito,
         'inscricao_aberta': inscricao_aberta,
+        'aprovado': aprovado,
     })
 
 @login_required

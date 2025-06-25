@@ -11,4 +11,5 @@ urlpatterns = [
     path('aprovacoes/', views.aprovacoes, name='aprovacoes'),
     path('aprovacao/<uuid:user_uuid>/', views.aprovar_usuario, name='aprovar_usuario'),
     path('resetar-senha/', views.resetar_senha, name='resetar_senha'),
+    path('perfil/', views.perfil, name='perfil'),
 ]

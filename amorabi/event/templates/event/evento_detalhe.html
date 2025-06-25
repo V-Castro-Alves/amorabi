@@ -3,7 +3,7 @@
 {% block title %}Detalhes do Evento{% endblock %}
 
 {% block content %}
-<div class="card mt-4">
+<div class="card mt-4 mb-4">
     <div class="card-header bg-primary text-white">
         <h1 class="card-title">{{ evento.titulo }}</h1>
     </div>
@@ -20,6 +20,8 @@
             <div class="alert alert-info mt-3">Você já está inscrito neste evento.</div>
         {% elif not inscricao_aberta %}
             <div class="alert alert-warning mt-3">O prazo de inscrição para este evento já terminou.</div>
+        {% elif not aprovado %}
+            <div class="alert alert-danger mt-3">Sua conta ainda não foi aprovada. Aguarde a aprovação para se inscrever em eventos.</div>
         {% else %}
             <form method="post" action="{% url 'event:participar_evento' evento.uuid %}">
                 {% csrf_token %}

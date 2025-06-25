@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Conheça o Bairro Itinga{% endblock %}
+
+{% block extra_css %}
+<link href="{% static 'css/landing-custom.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section position-relative overflow-hidden bg-primary bg-opacity-10">
+    <div class="container py-5 text-center">
+        <div class="row align-items-center">
+            <div class="col-lg-6 text-lg-start mb-4 mb-lg-0">
+                <h1 class="display-3 fw-bold text-gradient">Itinga</h1>
+                <p class="lead mb-4">
+                    <span class="badge bg-primary mb-2">Bairro Histórico de Joinville 🏞️</span><br>
+                    Um pedaço vibrante da cidade com raízes que remontam ao século XIX<br>
+                    Comunidade forte, cultura rica e um futuro promissor.
+                </p>
+                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-lg-start justify-content-center">
+                    <a href="#" class="btn btn-primary btn-lg">
+                        <i class="bi bi-info-circle me-2"></i>Saiba Mais
+                    </a>
+                    <a href="{% url 'event:event_list' %}" class="btn btn-outline-primary btn-lg">
+                        <i class="bi bi-calendar-event me-2"></i>Eventos no Itinga
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-image-container position-relative">
+                    <!-- Imagem ou ilustração do bairro -->
+                    <div class="rounded-circle bg-primary bg-opacity-10 p-4 hero-shape"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="shape-divider-bottom"></div>
+</section>
+
+<!-- História do Bairro -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">História do Itinga</span>
+        </h2>
+        <div class="row gx-5">
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4">Raízes Antigas</h3>
+                        <p class="card-text">
+                            O Itinga começou como uma área rural no século XIX, com colonizadores europeus que trouxeram cultura, tradição e força de trabalho para Joinville. O bairro cresceu com o tempo, mantendo seu charme de comunidade unida e acolhedora.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card border-0 shadow-sm h-100 hover-card">
+                    <div class="card-body p-4">
+                        <h3 class="card-title h4">Crescimento e Modernização</h3>
+                        <p class="card-text">
+                            A partir das décadas de 70 e 80, o Itinga passou por grande expansão urbana, com melhorias em infraestrutura, escolas, e comércio local, mantendo ainda viva a cultura comunitária através de eventos e associações como a AMORABI.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Características e Cultura -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">Características do Itinga</span>
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card text-center p-4">
+                    <i class="bi bi-tree-fill fs-1 text-primary mb-3"></i>
+                    <h5>Áreas Verdes</h5>
+                    <p>O bairro é conhecido pelas praças e áreas verdes que oferecem lazer e contato com a natureza.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card text-center p-4">
+                    <i class="bi bi-people-fill fs-1 text-primary mb-3"></i>
+                    <h5>Comunidade Forte</h5>
+                    <p>Moradores engajados que participam ativamente em projetos sociais e culturais.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm h-100 hover-card text-center p-4">
+                    <i class="bi bi-shop-window fs-1 text-primary mb-3"></i>
+                    <h5>Comércio Local</h5>
+                    <p>Pequenos negócios e feiras tradicionais que fortalecem a economia do bairro.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Galeria -->
+<section class="py-5">
+    <div class="container">
+        <h2 class="fw-bold text-center mb-5 position-relative">
+            <span class="underline-highlight">Galeria do Itinga</span>
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Praça Central</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Feira do Itinga</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Evento Cultural</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="gallery-item rounded shadow-sm">
+                    <div class="gallery-placeholder bg-light d-flex align-items-center justify-content-center">
+                        <i class="bi bi-image text-secondary" style="font-size: 2rem;"></i>
+                    </div>
+                    <p class="mt-2 text-center fw-medium">Parque Ambiental</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contato -->
+<section class="py-5 bg-gradient position-relative">
+    <div class="container text-center py-4">
+        <h2 class="fw-bold mb-4 text-white">Contato</h2>
+        <p class="mb-4 text-white">Quer saber mais? Fale com a gente pelas redes sociais:</p>
+        <div class="d-flex flex-wrap justify-content-center gap-4">
+            <a href="https://www.facebook.com/AmorabiItinga" target="_blank" class="social-link facebook">
+                <i class="bi bi-facebook"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/amorabi" target="_blank" class="social-link instagram">
+                <i class="bi bi-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://wa.me/SEUNUMERO" target="_blank" class="social-link whatsapp">
+                <i class="bi bi-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        document.querySelectorAll('.card, .gallery-item, h2, .social-link').forEach(el => {
+            observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}

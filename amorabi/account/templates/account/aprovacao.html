@@ -1,26 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Usuários pendentes de aprovação</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Usuário</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in users %}
-      <tr>
-        <td>{{ user.username }}</td>
-        <td>
-          <a href="{% url 'account:aprovar_usuario' user.uuid %}">Ver detalhes</a>
-        </td>
-      </tr>
-    {% empty %}
-      <tr>
-        <td colspan="2">Nenhum usuário pendente de aprovação.</td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="row justify-content-center">
+  <div class="col-lg-8 col-md-10">
+    <div class="card shadow-sm">
+      <div class="card-header bg-primary text-white">
+        <h2 class="mb-0 fs-4">Usuários pendentes de aprovação</h2>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th scope="col">Usuário</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+                <tr>
+                  <td>{{ user.username }}</td>
+                  <td>
+                    <a href="{% url 'account:aprovar_usuario' user.uuid %}" class="btn btn-outline-primary btn-sm">
+                      <i class="bi bi-eye"></i> Ver detalhes
+                    </a>
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="2" class="text-center text-muted">Nenhum usuário pendente de aprovação.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}

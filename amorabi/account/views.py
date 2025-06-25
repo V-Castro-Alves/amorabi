@@ -59,6 +59,5 @@ def resetar_senha(request):
 
 @login_required
 def perfil(request):
-
-
-    return render(request, 'account/perfil.html')
+    meus_eventos = request.user.eventos_responsavel.all()
+    return render(request, 'account/perfil.html', {'meus_eventos': meus_eventos})
