@@ -18,6 +18,12 @@
         <p><strong>Responsável:</strong> {{ evento.responsavel.username }}</p>
         {% if inscrito %}
             <div class="alert alert-info mt-3">Você já está inscrito neste evento.</div>
+            {% if inscricao_aberta %}
+                <form method="post" action="{% url 'event:desinscrever_evento' evento.uuid %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mt-2">Desinscrever-se</button>
+                </form>
+            {% endif %}
         {% elif not inscricao_aberta %}
             <div class="alert alert-warning mt-3">O prazo de inscrição para este evento já terminou.</div>
         {% elif not aprovado %}

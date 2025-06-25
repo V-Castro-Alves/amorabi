@@ -81,12 +81,19 @@ def evento_create(request):
 @login_required
 def evento_detail(request, uuid):
     evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
-    inscrito = Participacao.objects.filter(usuario=request.user, evento=evento).exists()
+    inscrito = Participacao.objects.filter(
+        usuario=request.user,
+        evento=evento,
+        ativo=True
+    ).exclude(status='cancelada').exists()
     inscricao_aberta = timezone.now() <= evento.data_limite_inscricao
     # Check if user is approved
-    aprovado = StatusUsuario.objects.filter(
-        usuario=request.user, status='aprovado', ativo=True
-    ).exists()
+    aprovado = (
+        request.user.is_superuser or
+        StatusUsuario.objects.filter(
+            usuario=request.user, status='aprovado', ativo=True
+        ).exists()
+    )
     return render(request, 'event/evento_detalhe.html', {
         'evento': evento,
         'inscrito': inscrito,
@@ -99,16 +106,45 @@ def participar_evento(request, uuid):
     evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
     user = request.user
 
-    # Check if already registered
-    if Participacao.objects.filter(usuario=user, evento=evento).exists():
-        messages.warning(request, "Você já está inscrito neste evento.")
-        return redirect('event:evento_detail', uuid=evento.uuid)
-
     # Check if registration is still open
     if timezone.now() > evento.data_limite_inscricao:
         messages.error(request, "O prazo de inscrição para este evento já terminou.")
         return redirect('event:evento_detail', uuid=evento.uuid)
 
-    Participacao.objects.create(usuario=user, evento=evento)
-    messages.success(request, "Inscrição realizada com sucesso!")
+    participacao = Participacao.objects.filter(usuario=user, evento=evento).first()
+    if participacao:
+        if participacao.ativo and participacao.status != 'cancelada':
+            messages.warning(request, "Você já está inscrito neste evento.")
+            return redirect('event:evento_detail', uuid=evento.uuid)
+        # Reativar participação cancelada/inativa
+        participacao.ativo = True
+        participacao.status = 'pendente'
+        participacao.data_cancelamento = None
+        participacao.motivo_cancelamento = None
+        participacao.save()
+        messages.success(request, "Inscrição reativada com sucesso!")
+    else:
+        Participacao.objects.create(usuario=user, evento=evento)
+        messages.success(request, "Inscrição realizada com sucesso!")
+    return redirect('event:evento_detail', uuid=evento.uuid)
+
+@login_required
+def desinscrever_evento(request, uuid):
+    evento = get_object_or_404(Evento, uuid=uuid, ativo=True)
+    user = request.user
+
+    participacao = Participacao.objects.filter(usuario=user, evento=evento, ativo=True).first()
+    if not participacao:
+        messages.warning(request, "Você não está inscrito neste evento.")
+        return redirect('event:evento_detail', uuid=evento.uuid)
+
+    if timezone.now() > evento.data_limite_inscricao:
+        messages.error(request, "O prazo para desinscrição já terminou.")
+        return redirect('event:evento_detail', uuid=evento.uuid)
+
+    participacao.ativo = False
+    participacao.status = 'cancelada'
+    participacao.data_cancelamento = timezone.now()
+    participacao.save()
+    messages.success(request, "Desinscrição realizada com sucesso!")
     return redirect('event:evento_detail', uuid=evento.uuid)
