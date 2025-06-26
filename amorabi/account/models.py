@@ -27,6 +27,8 @@ class CustomUser(AbstractUser):
     ]
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='usuario')
     cpf = models.CharField(max_length=11, unique=True, blank=True, null=True)
+    endereco_residencial = models.CharField(max_length=255, blank=True)
+    data_nascimento = models.DateField(blank=True, null=True)
     ativo = models.BooleanField(default=True)
 
     def __str__(self):

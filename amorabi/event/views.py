@@ -43,7 +43,8 @@ def event_list(request):
             ).exclude(status='cancelada')
             .values_list('evento__uuid', flat=True)
         )
-
+    else:
+        eventos_inscritos = set()
     # Annotate with vagas_disponiveis
     eventos = eventos.annotate(
         inscritos_confirmados=Count('participacoes', filter=Q(participacoes__status='confirmada', participacoes__ativo=True)),
@@ -127,7 +128,7 @@ def participar_evento(request, uuid):
         participacao.save()
         messages.success(request, "Inscrição reativada com sucesso!")
     else:
-        Participacao.objects.create(usuario=user, evento=evento)
+        Participacao.objects.create(usuario=user, evento=evento, status='confirmada')
         messages.success(request, "Inscrição realizada com sucesso!")
     return redirect('event:evento_detail', uuid=evento.uuid)
 
